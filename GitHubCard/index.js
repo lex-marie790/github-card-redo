@@ -4,7 +4,13 @@ import axios from 'axios';
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
-
+axios.get('https://api.github.com/users/lex-marie790')
+  .then(response => {
+    console.log(response)
+  })
+  .catch(err => {
+    console.log('Error:', err)
+  })
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
     github info! You will need to understand the structure of this
@@ -50,6 +56,40 @@ const followersArray = [];
       </div>
     </div>
 */
+function createCard(items) {
+  let card = document.createElement('div')
+  let userImg = document.createElement('img');
+  let cardInfo = document.createElement('div')
+  let usersName = document.createElement('h3')
+  let usersName1 = document.createElement('p')
+  let usersLocation = document.createElement('p')
+  let usersProfile = document.createElement('p')
+  let usersUrl = document.createElement('a')
+  let usersFollowers = document.createElement('p')
+  let usersFollowing = document.createElement('p')
+  let usersBio = document.createElement('p')
+
+  // add class names to elements
+  card.classList.add('card');
+  cardInfo.classList.add('card-info');
+  usersName.classList.add('name');
+  usersName1.classList.add('username');
+
+  // set attributes
+  userImg.src = items.avatar_url;
+  usersProfile.href = items.url; 
+
+  // fill in rest of items
+  usersName.textContent = items.login
+  usersName1.textContent = items.name
+  usersLocation.textContent = items.location
+  usersProfile.textContent = items.url
+  usersFollowers.textContent = items.followers
+  usersFollowing.textContent = items.following
+  usersBio.textContent = items.bio
+
+
+}
 
 /*
   List of LS Instructors Github username's:
