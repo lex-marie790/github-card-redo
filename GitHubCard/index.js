@@ -5,8 +5,8 @@ import axios from 'axios';
     https://api.github.com/users/<your name>
 */
 axios.get('https://api.github.com/users/lex-marie790')
-  .then(response => {
-    console.log(response)
+  .then(info => {
+  
   })
   .catch(err => {
     console.log('Error:', err)
@@ -69,6 +69,8 @@ function createCard(items) {
   let usersFollowing = document.createElement('p')
   let usersBio = document.createElement('p')
 
+
+
   // add class names to elements
   card.classList.add('card');
   cardInfo.classList.add('card-info');
@@ -77,18 +79,31 @@ function createCard(items) {
 
   // set attributes
   userImg.src = items.avatar_url;
-  usersProfile.href = items.url; 
 
   // fill in rest of items
-  usersName.textContent = items.login
-  usersName1.textContent = items.name
-  usersLocation.textContent = items.location
-  usersProfile.textContent = items.url
-  usersFollowers.textContent = items.followers
-  usersFollowing.textContent = items.following
-  usersBio.textContent = items.bio
+  usersName.textContent = "Username: " + items.login
+  usersName1.textContent = "Name: " + items.name
+  usersLocation.textContent = "Location: " + items.location
+  usersProfile.textContent = "URL: " + items.url
+  usersFollowers.textContent = "Followers: " + items.followers
+  usersFollowing.textContent = "Following: " + items.following
+  usersBio.textContent = "Bio: " + items.bio
+  usersProfile.textContent = "Profile: " + items.html_url
 
 
+  // append items
+  card.appendChild(cardInfo)
+  card.appendChild(userImg);
+  cardInfo.appendChild(usersName)
+  usersName.appendChild(usersName1)
+  usersName1.appendChild(usersLocation)
+  usersLocation.appendChild(usersProfile)
+  usersProfile.appendChild(usersFollowers)
+  usersFollowers.appendChild(usersFollowing)
+  usersFollowing.appendChild(usersBio)
+  usersProfile.appendChild(usersUrl)
+
+  return card
 }
 
 /*
