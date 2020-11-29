@@ -5,8 +5,11 @@ import axios from 'axios';
     https://api.github.com/users/<your name>
 */
 axios.get('https://api.github.com/users/lex-marie790')
-  .then(info => {
-  
+  .then(res => {
+    console.log(res)
+    const myCard = res.data;
+    const cards = document.querySelector('.cards')
+    cards.appendChild(createCard(myCard))
   })
   .catch(err => {
     console.log('Error:', err)
@@ -57,7 +60,7 @@ const followersArray = [];
     </div>
 */
 function createCard(items) {
-  let card = document.createElement('div')
+  let container = document.createElement('div')
   let userImg = document.createElement('img');
   let cardInfo = document.createElement('div')
   let usersName = document.createElement('h3')
@@ -72,13 +75,25 @@ function createCard(items) {
 
 
   // add class names to elements
-  card.classList.add('card');
+  container.classList.add('card');
   cardInfo.classList.add('card-info');
   usersName.classList.add('name');
   usersName1.classList.add('username');
 
   // set attributes
   userImg.src = items.avatar_url;
+
+    // append items
+  container.appendChild(cardInfo)
+  container.appendChild(userImg);
+  cardInfo.appendChild(usersName)
+  cardInfo.appendChild(usersName1)
+  cardInfo.appendChild(usersLocation)
+  cardInfo.appendChild(usersProfile)
+  cardInfo.append(usersFollowers)
+  cardInfo.append(usersFollowing)
+  cardInfo.append(usersBio)
+  usersProfile.append(usersUrl)
 
   // fill in rest of items
   usersName.textContent = "Username: " + items.login
@@ -90,20 +105,7 @@ function createCard(items) {
   usersBio.textContent = "Bio: " + items.bio
   usersProfile.textContent = "Profile: " + items.html_url
 
-
-  // append items
-  card.appendChild(cardInfo)
-  card.appendChild(userImg);
-  cardInfo.appendChild(usersName)
-  usersName.appendChild(usersName1)
-  usersName1.appendChild(usersLocation)
-  usersLocation.appendChild(usersProfile)
-  usersProfile.appendChild(usersFollowers)
-  usersFollowers.appendChild(usersFollowing)
-  usersFollowing.appendChild(usersBio)
-  usersProfile.appendChild(usersUrl)
-
-  return card
+  return container
 }
 
 /*
